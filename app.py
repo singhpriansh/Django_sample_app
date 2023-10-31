@@ -31,24 +31,26 @@ def hello_world():
 
 @app.route('/update/',methods=['GET','POST'])
 def update():
+    """Function to update todo's"""
     if request.method == 'POST':
         sno = request.form['update']
         data = Todo.query.filter_by(sno=sno).first()
     return render_template('update.html', todo=data)
 
-@app.route('/upgrade/<int:sno>',methods=['GET','POST'])
-def upgrade(sno):
+@app.route('/upgrade/',methods=['GET','POST'])
+def upgrade():
+    """Function to change todo's post"""
     if request.method == 'POST':
+        sno = request.form['update']
         todo = Todo.query.filter_by(sno=sno).first()
-        print(request.form)
         todo.title = request.form['title']
         todo.description = request.form['desc']
         db.session.commit()
-        alltodo = Todo.query.all()
-        return render_template('index.html',alltodo=alltodo)
+        return redirect("/")
 
 @app.route('/delete/', methods=['GET','POST'])
 def delete():
+    """Function to delete a todo"""
     if request.method == 'POST':
         sno = request.form['delete']
         todo = Todo.query.filter_by(sno=sno).first()
@@ -58,6 +60,7 @@ def delete():
 
 @app.route('/show')
 def show():
+    "Function to delete a todo"
     alltodo = Todo.query.all()
     print(alltodo)
     return 'this is to return the data from database'

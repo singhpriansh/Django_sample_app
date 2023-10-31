@@ -5,7 +5,7 @@
 {% block body %}
   <div class="container my-3">
     <h2>Update Page</h2>
-    <form action='/upgrade/{{todo.sno}}' method="post">
+    <form action='/upgrade/' method="post">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Todo List</label>
         <input type="text" class="form-control" name="title" value="{{todo.title}}" id="title">
@@ -15,7 +15,10 @@
         <label for="text" class="form-label">Todo Description</label>
         <input type="text" class="form-control" name="desc" value="{{todo.description}}" id="desc">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div style="float:left">
+          <button type="submit" value="{{todo.sno}}" name="update" id="update" class="btn btn-primary">Submit</button>
+      </div>
+      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
     </form>
   </div>
 {% endblock %}
